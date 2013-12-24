@@ -75,7 +75,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/samuelmantou/MCSwipeTableViewCell-iOS7.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/samuelmantou/MCSwipeTableViewCell-iOS7.git", :tag => "1.1.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
