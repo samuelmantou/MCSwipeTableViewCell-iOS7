@@ -62,14 +62,15 @@
     }
 
     [cell setDelegate:self];
-    [cell setFirstStateIconName:@"check.png"
-                     firstColor:[UIColor colorWithRed:85.0 / 255.0 green:213.0 / 255.0 blue:80.0 / 255.0 alpha:1.0]
-            secondStateIconName:@"cross.png"
-                    secondColor:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                  thirdIconName:@"clock.png"
-                     thirdColor:[UIColor colorWithRed:254.0 / 255.0 green:217.0 / 255.0 blue:56.0 / 255.0 alpha:1.0]
-                 fourthIconName:@"list.png"
-                    fourthColor:[UIColor colorWithRed:206.0 / 255.0 green:149.0 / 255.0 blue:98.0 / 255.0 alpha:1.0]];
+//    [cell setFirstStateIconName:@"check.png"
+//                     firstColor:[UIColor colorWithRed:85.0 / 255.0 green:213.0 / 255.0 blue:80.0 / 255.0 alpha:1.0]
+//            secondStateIconName:@"cross.png"
+//                    secondColor:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+//                  thirdIconName:@"clock.png"
+//                     thirdColor:[UIColor colorWithRed:254.0 / 255.0 green:217.0 / 255.0 blue:56.0 / 255.0 alpha:1.0]
+//                 fourthIconName:@"list.png"
+//                    fourthColor:[UIColor colorWithRed:206.0 / 255.0 green:149.0 / 255.0 blue:98.0 / 255.0 alpha:1.0]];
+    [cell setRightNames:@[@"黑名单"] rightColors:@[[UIColor blackColor]]];
 
     [cell.contentView setBackgroundColor:[UIColor whiteColor]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleGray];

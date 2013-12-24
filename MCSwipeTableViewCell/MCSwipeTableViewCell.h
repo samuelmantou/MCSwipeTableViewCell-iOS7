@@ -22,6 +22,13 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection){
     MCSwipeTableViewCellDirectionRight
 };
 
+//Allow Cell Pan Direction
+typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellAllowDirection){
+    MCSwipeTableViewCellAllowDirectionBoth,
+    MCSwipeTableViewCellAllowDirectionLeft = 0,
+    MCSwipeTableViewCellAllowDirectionRight
+};
+
 typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellMode){
     MCSwipeTableViewCellModeExit = 0,
     MCSwipeTableViewCellModeSwitch
@@ -37,6 +44,11 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellMode){
 @interface MCSwipeTableViewCell : UITableViewCell
 
 @property(nonatomic, assign) id <MCSwipeTableViewCellDelegate> delegate;
+
+@property(nonatomic, copy) NSString *firstName;
+@property(nonatomic, copy) NSString *secondName;
+@property(nonatomic, copy) NSString *thirdName;
+@property(nonatomic, copy) NSString *fourthName;
 
 @property(nonatomic, copy) NSString *firstIconName;
 @property(nonatomic, copy) NSString *secondIconName;
@@ -72,4 +84,9 @@ secondStateIconName:(NSString *)secondIconName
                fourthIconName:(NSString *)fourthIconName
                   fourthColor:(UIColor *)fourthColor;
 
+- (void)setRightNames:(NSArray *)rightNames
+          rightColors:(NSArray *)rightColors;
+
+- (void)setLeftNames:(NSArray *)leftNames
+          leftColors:(NSArray *)leftColors;
 @end

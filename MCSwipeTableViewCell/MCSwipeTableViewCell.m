@@ -8,8 +8,8 @@
 
 #import "MCSwipeTableViewCell.h"
 
-static CGFloat const kMCStop1 = 0.20; // Percentage limit to trigger the first action
-static CGFloat const kMCStop2 = 0.75; // Percentage limit to trigger the second action
+static CGFloat kMCStop1 = 0.20; // Percentage limit to trigger the first action
+static CGFloat kMCStop2 = 0.75; // Percentage limit to trigger the second action
 static CGFloat const kMCBounceAmplitude = 20.0; // Maximum bounce amplitude when using the MCSwipeTableViewCellModeSwitch mode
 static NSTimeInterval const kMCBounceDuration1 = 0.2; // Duration of the first part of the bounce animation
 static NSTimeInterval const kMCBounceDuration2 = 0.1; // Duration of the second part of the bounce animation
@@ -56,12 +56,14 @@ static NSTimeInterval const kMCDurationHightLimit = 0.1; // Highest duration whe
 - (void)notifyDelegate;
 
 @property(nonatomic, assign) MCSwipeTableViewCellDirection direction;
+@property (nonatomic, assign) MCSwipeTableViewCellAllowDirection allowDirection;
 @property(nonatomic, assign) CGFloat currentPercentage;
 
 @property(nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property(nonatomic, strong) UIImageView *slidingImageView;
 @property(nonatomic, strong) NSString *currentImageName;
 @property(nonatomic, strong) UIView *colorIndicatorView;
+
 
 @end
 
@@ -176,7 +178,18 @@ secondStateIconName:(NSString *)secondIconName
     CGFloat percentage = [self percentageWithOffset:CGRectGetMinX(self.contentView.frame) relativeToWidth:CGRectGetWidth(self.bounds)];
     NSTimeInterval animationDuration = [self animationDurationWithVelocity:velocity];
     _direction = [self directionWithPercentage:percentage];
-
+    
+    //判断是否允许左移动或右移动
+    if (self.allowDirection == MCSwipeTableViewCellAllowDirectionLeft && _direction == MCSwipeTableViewCellDirectionLeft) {
+        [self bounceToOrigin];
+        return;
+    }else if (self.allowDirection == MCSwipeTableViewCellAllowDirectionRight && _direction == MCSwipeTableViewCellDirectionRight){
+        [self bounceToOrigin];
+        return;
+    }else{
+        
+    }
+    
     if (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged) {
         _isDragging = YES;
         
@@ -439,7 +452,7 @@ secondStateIconName:(NSString *)secondIconName
 
     CGFloat percentage = [self percentageWithOffset:origin relativeToWidth:CGRectGetWidth(self.bounds)];
     CGRect rect = self.contentView.frame;
-    rect.origin.x = origin;
+    rect.origin.x = origin/2;
 
     // Color
     UIColor *color = [self colorWithPercentage:_currentPercentage];
@@ -527,4 +540,22 @@ secondStateIconName:(NSString *)secondIconName
     [self setFourthColor:fourthColor];
 }
 
+- (void)setRightNames:(NSArray *)rightNames
+          rightColors:(NSArray *)rightColors
+{
+    self.allowDirection = MCSwipeTableViewCellAllowDirectionRight;
+    [self setThirdColor:rightColors[0]];
+    if ([rightColors count] > 1) {
+        [self setFourthColor:rightColors[1]];
+    }
+    
+    kMCStop1 = 0.0f;
+}
+
+- (void)setLeftNames:(NSArray *)leftNames
+          leftColors:(NSArray *)leftColors
+{
+    self.allowDirection = MCSwipeTableViewCellAllowDirectionLeft;
+    kMCStop2 = 1.0f;
+}
 @end
